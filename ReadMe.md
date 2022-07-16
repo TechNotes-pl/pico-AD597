@@ -1,7 +1,15 @@
-# pico-AD597
+# Projekt pico-AD597
+
+Celem projektu jest kod urządzenia testowego czujników temperatury.
+Odczyty temperatury powinny być wyświetlane na konsoli.
 
 # Utworzenie projektu CMAKE
-Projekt na początku ma zawierać plik main.c, CMakeList.txt i katalog build. Nazwa main.c jest w CMakeList.txt.
+Projekt na początku ma zawierać:
+* plik z funkcją __main()_; dla porządku w folderze __src__)
+* CMakeList.txt (skopiowany z innego projektu)
+* katalog build (pusty)
+
+Nazwa pliku z funkcją main() jest podana CMakeList.txt jako __main.c__.
 
 ```
 $ cd build
@@ -9,19 +17,17 @@ $ cmake ..
 $ make -j2
 ```
 
-Amongst other targets, we have now built:
-• blink.elf, which is used by the debugger
-• blink.uf2, which can be dragged onto the RP2040 USB Mass Storage Device
-This binary will blink the on-board LED of the Raspberry Pi Pico which is connected to GPIO25 of RP2040.
+Make powinien poprawnie zbudować następujące "targety":
+* __blink.elf__ - którego używa debugger
+* __blink.uf2__ - który można przeciągnąć na urządzenie pamięci masowej USB RP2040
 
-Teraz tylko wgrać build.uf2 na dysk pico (Podłączenie ze wciśniętym przyciskiem) - miga zielona dioda USER_LED na płytce.
+Skopuj __build.uf2__ na dysk virtualny pico (ponowne podłączenie kabelka USB ze wciśniętym przyciskiem na pico).
 
 # Podłączenie terminala do raspberry pico 
 Funkcja printf() ma skonfigurowany output na serial over USB zamiast na UART.
 Po połączeniu komputera z pico kablem USB sprawdź nazwę urządzenia.
 ```
 $ dmesg | egrep --color 'USB ACM device'
-
 ```
 Uruchom konsolę zestawiając połączenie szeregowe z raspberry pico:
 ```
