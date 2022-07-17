@@ -8,5 +8,14 @@
  * @copyright Copyright (c) 2022
  * 
  */
+#pragma once
 
-#define ADC_pin 26
+#include "hardware/adc.h"
+
+#define TC1_pin 26
+
+void tc_init(uint adc_pin);
+
+float tc_read();
+
+float voltage_to_temperature(float voltage);

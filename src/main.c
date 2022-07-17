@@ -1,41 +1,39 @@
+/**
+ * @file main.c
+ * @author TechNotes.pl
+ * @brief 
+ * @version 0.1
+ * @date 2022-07-17
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #include <stdio.h>
 #include "pico/stdlib.h"
-#include "AD597.h"
+#include "hardware/gpio.h"
+#include "../include/AD597.h"
+#include "../include/leds.h"
+
+const char* uom = "C deg"
 
 int main() {
-
-    const uint8_t green_led_pin = 25;
-    const uint8_t blue_led_pin = 21;
-    const uint8_t input_pin = 20;
-
-    // Initialize LED pin
-    gpio_init(green_led_pin);
-    gpio_set_dir(green_led_pin, GPIO_OUT);
-
-    gpio_init(blue_led_pin);
-    gpio_set_dir(blue_led_pin, GPIO_OUT);
-
-    gpio_init(input_pin);
-    gpio_set_dir(input_pin, GPIO_IN);
-    gpio_pull_up(input_pin);
-    int x = gpio_get(input_pin);
 
     // Initialize chosen serial port
     stdio_init_all();
 
-    printf("Hello, world!\n");
-   
+    // Initialize LED pin
+    leds_init();
+ 
+    // Initialize ADC 
+    tc_init(TC1_pin);
+
     // Loop forever
     while (true) {
 
-        // Blink LED
-        printf("Blinking!\r\n");
-        gpio_put(green_led_pin, true);
-        gpio_put(blue_led_pin, true);
-        sleep_ms(200);
-        gpio_put(blue_led_pin, false);
-        sleep_ms(800);
-        gpio_put(green_led_pin, false);
-        sleep_ms(1000);
+        // puts("\nBlinking... ");
+        leds_blink();
+
+        // Get sensor temperature
+        printf("\rSensor temperature: %3.1f %s", voltage_to_temperature(tc_read()), uom);    
     }
 }

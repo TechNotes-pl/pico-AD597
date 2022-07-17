@@ -3,10 +3,34 @@
 Celem projektu jest kod urządzenia testowego czujników temperatury.
 Odczyty temperatury powinny być wyświetlane na konsoli.
 
+
+# Konfiguracja
+
+Zobacz [Using the Raspberry Pi Pico on Ubuntu](https://www.gibbard.me/using_the_raspberry_pi_pico_on_ubuntu/)
+
+1. Zainstalowanie PICO-SDK i skompilowanie przykładów w folderze ~/Development/pico:
+```
+$ git clone -b master https://github.com/raspberrypi/pico-sdk.git
+$ cd pico-sdk
+$ git submodule update --init
+
+# Add SDK path to your environment
+$ echo 'export PICO_SDK_PATH=$HOME/Development/pico/pico-sdk' >> ~/.bashrc 
+
+$ cd ..
+$ git clone -b master https://github.com/raspberrypi/pico-examples.git
+$ cd pico-examples
+$ mkdir build
+$ cd build
+$ cmake ..
+$ cd blink
+$ make -j $(nproc)
+```
+
 # Utworzenie projektu CMAKE
 Projekt na początku ma zawierać:
 * plik z funkcją __main()_; dla porządku w folderze __src__)
-* CMakeList.txt (skopiowany z innego projektu)
+* CMakeList.txt
 * katalog build (pusty)
 
 Nazwa pliku z funkcją main() jest podana CMakeList.txt jako __main.c__.
@@ -41,7 +65,21 @@ $ sudo minicom -b 115200 -D /dev/ttyACM0
 # Oprogramowanie czujników temperatury
 
 ## Termopara typu k z przetwornikiem AD597
+```C
+**
+ * @brief
+ *  12-bit conversion, assume max value == ADC_VREF == 3.3 V
+ *
+ * @return float voltage
+ */
+float tc_read()
+{
+    const float conversion_factor = 3.3f / (1 << 12);
+    uint16_t result = adc_read();
 
+    return result * conversion_factor;
+}
+```
 
 
 Odnośniki:
