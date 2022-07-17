@@ -13,12 +13,11 @@ const float AD_voltage_temperature_factor = 100.0;
  */
 void tc_init(uint adc_pin)
 {
-    stdio_init_all();
-
     adc_init();
 
     // Make sure GPIO is high-impedance, no pullups etc
     adc_gpio_init(adc_pin);
+
     // Select ADC input 0 (GPIO26)
     adc_select_input(0);
 }
@@ -31,6 +30,9 @@ void tc_init(uint adc_pin)
  */
 float tc_read()
 {
+    // Select ADC input 0 for GPIO26 (0...3 are GPIOs 26...29 respectively, input 4 is the onboard temperature sensor)   
+    adc_select_input(0);
+
     const float conversion_factor = 3.3f / (1 << 12);
     uint16_t result = adc_read();
 

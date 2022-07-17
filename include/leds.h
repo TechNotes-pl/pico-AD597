@@ -12,4 +12,4 @@
 
 void leds_init();
 
-void leds_blink();
+void leds_blink(int);
