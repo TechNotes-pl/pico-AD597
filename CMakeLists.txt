@@ -14,9 +14,18 @@ pico_sdk_init()
 
 # Tell CMake where to find the executable source file
 add_executable(${PROJECT_NAME}
-    src/main.c
+    src/main.cpp
     src/AD597.c
     src/leds.c
+    src/one_wire.cpp
+)
+
+#target_sources(${PROJECT_NAME} INTERFACE
+#    ${CMAKE_CURRENT_LIST_DIR}/src/one_wire.cpp
+#)
+
+target_include_directories(${PROJECT_NAME} 
+    PUBLIC include
 )
 
 # Create map/bin/hex/uf2 files

@@ -11,7 +11,7 @@
 
 #include <stdio.h>
 #include "pico/stdlib.h"
-#include "../include/input.h"
+#include "input.h"
 
 const uint8_t input_pin = 20;
 

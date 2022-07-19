@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "pico/stdlib.h"
 #include "hardware/gpio.h"
-#include "../include/AD597.h"
+#include "AD597.h"
 
 
 const float AD_voltage_temperature_factor = 100.0;

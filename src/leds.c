@@ -10,7 +10,7 @@
  */
 #include <stdio.h>
 #include "pico/stdlib.h"
-#include "../include/leds.h"
+#include "leds.h"
 
 const uint8_t green_led_pin = 25;
 const uint8_t blue_led_pin = 21;

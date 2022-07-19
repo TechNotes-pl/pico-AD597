@@ -9,7 +9,14 @@
  * 
  */
 #pragma once
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 void leds_init();
 
 void leds_blink(int);
+
+#ifdef __cplusplus
+}
+#endif
