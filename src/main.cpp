@@ -8,12 +8,21 @@
  * @copyright Copyright (c) 2022
  * 
  */
+#include <iostream>
+#include <chrono>
+#include <thread>
+#include <stack>
+#include <stdexcept>
 #include <stdio.h>
 #include "pico/stdlib.h"
 #include "hardware/gpio.h"
 #include "leds.h"
 #include "AD597.h"
 #include "one_wire.h"
+#include "Menu.h"
+
+using namespace std;
+
 
 const char* uom = "C deg";
 

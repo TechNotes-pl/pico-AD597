@@ -8,6 +8,7 @@ include($ENV{PICO_SDK_PATH}/external/pico_sdk_import.cmake)
 project(pico-temperature C CXX ASM)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
+set(PICO_CXX_ENABLE_EXCEPTIONS 1)
 
 # Creates a pico-sdk subdirectory in our project for the libraries
 pico_sdk_init()
@@ -18,6 +19,9 @@ add_executable(${PROJECT_NAME}
     src/AD597.c
     src/leds.c
     src/one_wire.cpp
+    src/MenuItem.cpp
+    src/Menu.cpp
+    src/TerminalGui.cpp
 )
 
 #target_sources(${PROJECT_NAME} INTERFACE
@@ -36,6 +40,8 @@ target_link_libraries(${PROJECT_NAME}
     pico_stdlib
     hardware_adc
 )
+
+add_compile_definitions(RASPBERRY_PI_PICO=1)
 
 # Enable usb output, disable uart output
 # By enabling the USB port and disabling the UART port, 
